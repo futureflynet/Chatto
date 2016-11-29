@@ -128,6 +128,7 @@ open class BaseMessageCollectionViewCell<BubbleViewType>: UICollectionViewCell, 
     func createAvatarView() -> UIImageView! {
         let avatarImageView = UIImageView(frame: CGRect.zero)
         avatarImageView.isUserInteractionEnabled = true
+        avatarImageView.contentMode = .scaleAspectFill
         return avatarImageView
     }
 
@@ -207,6 +208,17 @@ open class BaseMessageCollectionViewCell<BubbleViewType>: UICollectionViewCell, 
         let avatarImageSize = baseStyle.avatarSize(viewModel: messageViewModel)
         if avatarImageSize != CGSize.zero {
             self.avatarView.image = self.messageViewModel.avatarImage.value
+            
+            if self.messageViewModel.maskAvatar {
+                
+                self.avatarView.layer.masksToBounds = true
+                self.avatarView.layer.cornerRadius = avatarImageSize.width/2
+            }
+            else {
+                
+                self.avatarView.layer.masksToBounds = false
+                self.avatarView.layer.cornerRadius = 0
+            }
         }
         self.setNeedsLayout()
     }

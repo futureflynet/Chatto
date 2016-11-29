@@ -45,6 +45,8 @@ public protocol PhotoMessageViewModelProtocol: DecoratedMessageViewModelProtocol
 }
 
 open class PhotoMessageViewModel<PhotoMessageModelT: PhotoMessageModelProtocol>: PhotoMessageViewModelProtocol {
+    public var maskAvatar: Bool
+
     public var photoMessage: PhotoMessageModelProtocol {
         return self._photoMessage
     }
@@ -65,6 +67,7 @@ open class PhotoMessageViewModel<PhotoMessageModelT: PhotoMessageModelProtocol>:
         self._photoMessage = photoMessage
         self.image = Observable(photoMessage.image)
         self.messageViewModel = messageViewModel
+        self.maskAvatar = true
     }
 
     open func willBeShown() {

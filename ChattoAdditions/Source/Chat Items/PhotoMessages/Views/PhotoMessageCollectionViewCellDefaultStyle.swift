@@ -199,7 +199,7 @@ public extension PhotoMessageCollectionViewCellDefaultStyle { // Default values
             placeholderIconTintOutgoing: UIColor.bma_color(rgb: 0x508dfc),
             progressIndicatorColorIncoming: UIColor.bma_color(rgb: 0x98a3ab),
             progressIndicatorColorOutgoing: UIColor.white,
-            overlayColor: UIColor.black.withAlphaComponent(0.70)
+            overlayColor: UIColor.init(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
         )
     }
 }

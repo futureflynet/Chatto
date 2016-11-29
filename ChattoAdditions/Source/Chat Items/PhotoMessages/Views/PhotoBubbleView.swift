@@ -76,9 +76,9 @@ open class PhotoBubbleView: UIView, MaximumLayoutWidthSpecificable, BackgroundSi
         return view
     }()
 
-    public private(set) var progressIndicatorView: CircleProgressIndicatorView = {
-        let progressView = CircleProgressIndicatorView(size: CGSize(width: 33, height: 33))
-        return progressView!
+    public private(set) var progressIndicatorView: UIActivityIndicatorView = {
+        let progressView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        return progressView
     }()
 
     private var placeholderIconView: UIImageView = {
@@ -132,24 +132,28 @@ open class PhotoBubbleView: UIView, MaximumLayoutWidthSpecificable, BackgroundSi
     private func updateProgressIndicator() {
         let transferStatus = self.photoMessageViewModel.transferStatus.value
         let transferProgress = self.photoMessageViewModel.transferProgress.value
-        self.progressIndicatorView.isHidden = [TransferStatus.idle, TransferStatus.success, TransferStatus.failed].contains(self.photoMessageViewModel.transferStatus.value)
-        self.progressIndicatorView.progressLineColor = self.photoMessageStyle.progressIndicatorColor(viewModel: self.photoMessageViewModel)
-        self.progressIndicatorView.progressLineWidth = 1
-        self.progressIndicatorView.setProgress(CGFloat(transferProgress))
-
+        //self.progressIndicatorView.isHidden = [TransferStatus.idle, TransferStatus.success, TransferStatus.failed].contains(self.photoMessageViewModel.transferStatus.value)
+        
+        //self.progressIndicatorView.progressLineColor = self.photoMessageStyle.progressIndicatorColor(viewModel: self.photoMessageViewModel)
+        //self.progressIndicatorView.progressLineWidth = 1
+        //self.progressIndicatorView.setProgress(CGFloat(transferProgress))
+        
         switch transferStatus {
         case .idle, .success, .failed:
-
+            self.progressIndicatorView.isHidden = true
+            progressIndicatorView.stopAnimating()
             break
         case .transfering:
-            switch transferProgress {
+            self.progressIndicatorView.isHidden = false
+            progressIndicatorView.startAnimating()
+            /*switch transferProgress {
             case 0:
                 if self.progressIndicatorView.progressStatus != .starting { self.progressIndicatorView.progressStatus = .starting }
             case 1:
                 if self.progressIndicatorView.progressStatus != .completed { self.progressIndicatorView.progressStatus = .completed }
             default:
                 if self.progressIndicatorView.progressStatus != .inProgress { self.progressIndicatorView.progressStatus = .inProgress }
-            }
+            }*/
         }
     }
 

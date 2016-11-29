@@ -46,6 +46,7 @@ public extension MessageStatus {
 public protocol MessageViewModelProtocol: class { // why class? https://gist.github.com/diegosanchezr/29979d22c995b4180830
     var isIncoming: Bool { get }
     var showsTail: Bool { get set }
+    var maskAvatar: Bool { get set }
     var showsFailedIcon: Bool { get }
     var date: String { get }
     var status: MessageViewModelStatus { get }
@@ -98,6 +99,8 @@ extension DecoratedMessageViewModelProtocol {
 }
 
 open class MessageViewModel: MessageViewModelProtocol {
+    public var maskAvatar: Bool = true
+
     open var isIncoming: Bool {
         return self.messageModel.isIncoming
     }
@@ -119,6 +122,7 @@ open class MessageViewModel: MessageViewModelProtocol {
         self.showsTail = showsTail
         self.messageModel = messageModel
         self.avatarImage = Observable<UIImage?>(avatarImage)
+        self.maskAvatar = true
     }
 
     open var showsFailedIcon: Bool {

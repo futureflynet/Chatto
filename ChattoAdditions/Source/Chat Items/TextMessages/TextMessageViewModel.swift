@@ -29,6 +29,8 @@ public protocol TextMessageViewModelProtocol: DecoratedMessageViewModelProtocol 
 }
 
 open class TextMessageViewModel<TextMessageModelT: TextMessageModelProtocol>: TextMessageViewModelProtocol {
+    public var maskAvatar: Bool
+
     public var text: String {
         return self.textMessage.text
     }
@@ -38,6 +40,7 @@ open class TextMessageViewModel<TextMessageModelT: TextMessageModelProtocol>: Te
     public init(textMessage: TextMessageModelT, messageViewModel: MessageViewModelProtocol) {
         self.textMessage = textMessage
         self.messageViewModel = messageViewModel
+        self.maskAvatar = true
     }
 
     open func willBeShown() {
