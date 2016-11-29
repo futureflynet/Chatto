@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.license      = { :type => "MIT"}
   s.platform     = :ios, "8.0"
   s.authors      = { 'Diego Sanchez' => 'diego.sanchezr@gmail.com' }
-  s.source       = { :git => "https://github.com/badoo/Chatto.git", :tag => s.version.to_s }
+  s.source       = { :git => "https://github.com/futureflynet/Chatto.git", :tag => s.version.to_s }
   s.source_files = "ChattoAdditions/Source/**/*.{h,m,swift}"
   s.public_header_files = "ChattoAdditions/Source/**/*.h"
   s.requires_arc = true
