@@ -71,7 +71,7 @@ open class BaseMessageCollectionViewCell<BubbleViewType>: UICollectionViewCell, 
     open var viewContext: ViewContext = .normal
 
     public private(set) var isUpdating: Bool = false
-    open func performBatchUpdates(_ updateClosure: @escaping () -> Void, animated: Bool, completion: (() ->())?) {
+    open func performBatchUpdates(_ updateClosure: @escaping () -> Void, animated: Bool, completion: (() -> Void)?) {
         self.isUpdating = true
         let updateAndRefreshViews = {
             updateClosure()
@@ -82,7 +82,7 @@ open class BaseMessageCollectionViewCell<BubbleViewType>: UICollectionViewCell, 
             }
         }
         if animated {
-            UIView.animate(withDuration: self.animationDuration, animations: updateAndRefreshViews, completion: { (finished) -> Void in
+            UIView.animate(withDuration: self.animationDuration, animations: updateAndRefreshViews, completion: { (_) -> Void in
                 completion?()
             })
         } else {
@@ -277,7 +277,7 @@ open class BaseMessageCollectionViewCell<BubbleViewType>: UICollectionViewCell, 
 
     // MARK: timestamp revealing
 
-    lazy var accessoryTimestampView = UILabel()
+    var accessoryTimestampView = UILabel()
 
     var offsetToRevealAccessoryView: CGFloat = 0 {
         didSet {
@@ -309,7 +309,7 @@ open class BaseMessageCollectionViewCell<BubbleViewType>: UICollectionViewCell, 
             if animated {
                 UIView.animate(withDuration: self.animationDuration, animations: { () -> Void in
                     self.layoutIfNeeded()
-                    }, completion: { (finished) -> Void in
+                    }, completion: { (_) -> Void in
                         if offset == 0 {
                             self.removeAccessoryView()
                         }

@@ -44,6 +44,7 @@ public struct ChatInputBarAppearance {
         public var font = UIFont.systemFont(ofSize: 16)
         public var textColor = UIColor.black
         public var placeholderFont = UIFont.systemFont(ofSize: 14)
+        public var tintColor: UIColor?
         public var placeholderColor = UIColor.gray
         public var placeholderText = ""
         public var textInsets = UIEdgeInsets(top: 14, left: 8, bottom: 10, right: 8)
@@ -66,7 +67,7 @@ public struct UIControlStateWrapper: Hashable {
     }
 
     public var hashValue: Int {
-        return Int(self.controlState.rawValue)
+        return self.controlState.rawValue.hashValue
     }
 }
 
